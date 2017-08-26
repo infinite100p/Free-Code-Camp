@@ -1,0 +1,92 @@
+html,
+body {
+    padding: 0;
+    margin: 0;    
+    background: rgb(250, 250, 245);
+}
+body {
+    font-family: Helvetica, sans-serif;
+    padding: 50px 10%;
+}
+
+/*** HEADER ***/
+
+h1 {
+    margin-top: 0;
+    font-family: Helvetica, sans-serif;
+    color: rgb(0, 100, 120);
+    font-size: 2.4em;
+    font-weight: bold;
+    display: inline-block;
+}
+p {
+    padding: 50px 0 50px 8px;
+    line-height: 2;
+    border-top: 2px dotted gray;
+    border-bottom: 2px dotted gray;
+    margin: 0;
+}
+.hide-me {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(.75);
+}
+
+/*** BUTTONS ***/
+
+button {
+    background-color: #046380;
+    color: #FFF;
+    border: none;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 2px 2px 0 #034154;
+    margin-top: 40px;
+    margin-left: 20px;
+    transition: opacity .4s ease-out, transform .4s ease-out, visibility .4s ease-out;
+}
+button:hover {
+    background-color: #034F66;
+}
+button:active {
+    background-color: #034154;
+    box-shadow: none;
+    position: relative;
+}
+.twitter-share-button {
+  margin-top: 5%;
+  transform: scale(1.5);
+}
+
+/*** QUOTES ***/
+
+#quote {
+    margin: 3%;
+}
+.fa-quote-left {    
+    display: block;
+    float: left;
+    
+    margin-top: 2%;
+}
+.fa-quote-right {
+    display: block;    
+    float: right;
+    margin-left: 32%;
+    margin-top: 2%;
+}
+
+/*** CONTAINER ***/
+
+#container {
+    padding: 65px;
+    border: 5px solid gray;
+    text-align: center;
+    /*   height: 20em; */
+}
+#btn-container {
+    text-align: center;
+}
