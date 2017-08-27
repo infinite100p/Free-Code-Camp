@@ -16,7 +16,7 @@ function randomNum(n) {
 
 // event handler for 'Generate New Quote' button
 btn[1].addEventListener("click", function(e) {
-  init(e, "next");
+  init(e, "next"); 
   changeBackgroundColor();
 });
 
@@ -85,9 +85,11 @@ function renderHTML(data, e, order) {
     console.log(archive);
   }
   if (order === "previous") {
-    if (archive.length === 0 || archive.length === 1 || pos <= 0) {
-      htmlString = archive[0];
-      
+    if (archive.length === 0 || archive.length === 1 || pos <= 0) { 
+      htmlString = ""; 
+      changeBackgroundColor();
+  
+
       // $('html').attr('backgroundColor', '#fff');
     } else {
       htmlString = archive[pos - 1];
