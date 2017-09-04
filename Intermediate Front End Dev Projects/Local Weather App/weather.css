@@ -1,0 +1,58 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  vertical-align: center;
+}
+
+#switch {
+  margin: 0 auto;
+  display: block;
+}
+.test {
+   /*background-image: url("https://images.unsplash.com/photo-1484766280341-87861644c80d"); */
+ /*background-image: url('sunny.jpeg');*/
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+/*   background-size: cover; */
+/*   display: block; */
+}
+
+.sunny, .cold {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;  
+}
+
+.sunny {
+   background-image: url('sunny.jpeg');
+}
+
+.cold {
+   background-image: url('snow.jpeg');
+
+}
+
+/* .cold {
+  
+} */
+
+/*img .sunny {
+  height: 20%;
+  width: 20%;
+  }*/
+
+img {
+  height: 50%;
+  width: 50%;
+  opacity: .6;
+  display: block;
+}
+
+.resize {
+  background:red url(http://i67.tinypic.com/2mqj1iq.jpg) no-repeat;
+  background-size:20% 20%;
+}
