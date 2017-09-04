@@ -24,11 +24,18 @@ function displayTemp() {
     ).then(function(data) {
       $("#temp").html(celsiusToFahrenheit(data.main.temp) + "&deg;F");
       metricListener(data);
+
+        // $('#location').html(data.name + ", " + data.sys.country);
+
+
+      displayLocation(data);
+      displayWeather(data);
       
       setBackground($("#temp").html());
       
       // console.log($("#temp").html());
       // $('#img-status').css('background-image', data.weather[0].icon);
+      console.log(loc);
     });
   });
 }
@@ -61,9 +68,24 @@ function setBackground(tempStr) {
   // console.log(img);
 }
 
+// display user's current location
+function displayLocation(data) {
+  $('#location').html(data.name + ", " + data.sys.country);
+}
+
+// display weather condition at current location
+function displayWeather(data) {
+  $('#icon').html("<img src= " + data.weather[0].icon + " />" );
+  $('#weather').append(data.weather[0].main);
+}
+
+
+
+
   // setBackground('2mooononnoiF'); // why is this 2??
   // setBackground('10&deg;F');
   console.log(toNum('2m30797ooononnoiF'));
+
 
 
 
