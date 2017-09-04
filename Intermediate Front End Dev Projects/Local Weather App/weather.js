@@ -25,19 +25,19 @@ function displayTemp() {
       $("#temp").html(celsiusToFahrenheit(data.main.temp) + "&deg;F");
       metricListener(data);
 
-      displayLocation(data);
-      displayWeather(data);
+      displayLocation(data); // display user's current location
+      displayWeather(data); // display weather condition at current location
       
-      setBackground($("#temp").html());
+      setBackground($("#temp").html()); // set appropriate background image based on temperature 
+
       
-            // $('#img-status').css('background-image', data.weather[0].icon);
-      console.log(loc);
+      // $('#img-status').css('background-image', data.weather[0].icon); // display weather icon
     });
   });
 }
 
-
-// set appropriate background image based on temperature 
+// For high temp > 50F, display sunny background image 
+// Otherwise, display snowy background image
 function setBackground(tempStr) {
   var img;
   
@@ -49,33 +49,8 @@ function setBackground(tempStr) {
       img = "snow.jpeg";
     }
     
-      $('body').css('background-image', 'url(' + img + ')');
-      // $('body').addClass('test');
-
-
-  
+      $('body').css('background-image', 'url(' + img + ')');  
 }
-
-// display user's current location
-function displayLocation(data) {
-  $('#location').html(data.name + ", " + data.sys.country);
-}
-
-// display weather condition at current location
-function displayWeather(data) {
-  $('#icon').html("<img src= " + data.weather[0].icon + " />" );
-  $('#weather').append(data.weather[0].main);
-}
-
-
-
-
-// convert from tempStr to number
-// (remove degree of metric unit)
-function toNum(tempStr) {
-  return parseInt(tempStr.slice(0, tempStr.length - 2));
-}
-
 
 // store user's current location in array if available [latitude, longitude]
 // otherwise, throw an error
@@ -128,6 +103,23 @@ function switchMetric(data) {
 }
 
 /************************************* HELPER FUNCTIONS *****************************************/
+
+// display user's current location
+function displayLocation(data) {
+  $('#location').html(data.name + ", " + data.sys.country);
+}
+
+// display weather condition at current location
+function displayWeather(data) {
+  $('#icon').html("<img src= " + data.weather[0].icon + " />" );
+  $('#weather').append(data.weather[0].main);
+}
+
+// convert from tempStr to number
+// (remove degree of metric unit)
+function toNum(tempStr) {
+  return parseInt(tempStr.slice(0, tempStr.length - 2));
+}
 
 // convert temperature from Celsius to Fahrenheit (2-digits)
 function celsiusToFahrenheit(temp) {
