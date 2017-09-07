@@ -1,18 +1,54 @@
 /**
   * Wikipedia Viewer
   * @author Tina Su - inspirationaltwist
-  * @version 1.0
+  * @version 1.2
 */
 
 const SENTENCE_LIMIT = 3;       // number of words to display
-
+var QUERY_LIMIT = 5;     // number of words to display
+var search = $('#search');
 
 /************************************* MAIN CODE *****************************************/
 
-getRandomWiki();
+getRandom();
+displayWikiEntries();
+
+
+/** Display list of Wiki results based on user input */
+function displayWikiEntries() {
+  search.keypress(function(e) {
+    if (search.val() && e.which === 13) {
+      console.log("success");
+
+      QUERY_LIMIT = parseInt($('select option:selected').text());
+
+      $.getJSON(`https://en.wikipedia.org/w/api.php?action=opensearch&search= 
+        ${search.val()} &limit= ${QUERY_LIMIT} &prop=revisions&rvprop=content&format=json&origin=*&gsrsearch=`).then(
+        function(wikiEntry) {
+          var wikiTitles = wikiEntry[1];
+          var wikiContent = wikiEntry[2];
+          var wikiLinks = wikiEntry[3];
+
+          var length = wikiTitles.length;
+          var num;
+
+          $('#searchResults').html("");
+
+          for (var i=0; i < length; i++) {
+            $('#searchResults').append(`<div class="wikiEntry"> <p> <b> ${wikiTitles[i]} </b> </p>
+               <p> ${wikiContent[i]} </p> <p> <a href=" ${wikiLinks[i]} "> Tell me more</span></a></div>`);
+            num = i;
+            console.log(num+1);
+          }
+          
+        })
+    }
+  })
+}
+
 
 /** Display title and content of random Wiki entry when user clicks on button */
-function getRandomWiki() {
+function getRandom() {
   $("#btn-random").on("click", function() {
     getTitle().then(function(wikiTitle) {
       // var url = `https://en.wikipedia.org/wiki/ ${wikiTitle}`;
@@ -74,8 +110,8 @@ function arrToStr(arr) {
   return arr.join(" ").replace(",", " ");
 }
 
-console.log(clipContent("hey there mister, are you okay?"));
-      // console.log(typeof ["yo"].slice(0, SENTENCE_LIMIT + 1).join(","));
+// console.log(clipContent("hey there mister, are you okay?"));
+// console.log(typeof ["yo"].slice(0, SENTENCE_LIMIT + 1).join(","));
 
 
 /************************************* QUESTIONS *****************************************/
