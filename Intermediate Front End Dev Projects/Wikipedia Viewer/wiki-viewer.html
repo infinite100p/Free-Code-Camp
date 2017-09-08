@@ -4,6 +4,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="wiki-viewer.css">
+  <title>Wiki Viewer</title>
 
 </head>
 
@@ -11,6 +12,18 @@
 
 <!-- Search & display wiki entries 
 Click button and show random wiki entry -->
+<!--   <h1>Wiki Viewer</h1> -->
+<input id="search" type="text">
+<select>
+	<option value="10">5</option>  
+	<option value="10">10</option>
+	<option value="20">20</option>
+	<option value="30">30</option>
+	<option value="40">40</option>
+	<option value="50">50</option>
+</select>
+
+<p id="searchResults">Click icon to search</p>
 <div class="highlight" id="content"></div>
 
 <button id="btn-random" class="btn btn-primary">Random Wiki Entry</button>
@@ -18,3 +31,10 @@ Click button and show random wiki entry -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src='wiki-viewer.js'></script>
 </body>
+  
+<!--   Features to Include In Next Version
+ auto search refresh when user changes filter option  show "x of total" search queries displayed at the top 
+  switch from light -> dark mode (and vice versa)
+  search queries & random queries should display results in same area
+  show topic suggestions as user types in search box
+-->

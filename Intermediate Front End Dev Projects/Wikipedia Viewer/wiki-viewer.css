@@ -1,12 +1,51 @@
-body {
+:root {
+    --bgcolor: #FCFFF9;
+}
+
+html, body {
   text-align: center;
-  background-color: #DFF5D2;
+  /*background-color: darkbrown;*/
   background: url(http://wallpaperscraft.ru/image/bliki_svet_zelenyj_abstraktsiya_95934_2560x1600.jpg) no-repeat;
   background-size: cover;
+  color: #000;
+  background-color: var(--bgcolor);
 }
 
 p {
-  text-align: left;
+  margin-top: 2%;
+}
+
+.wikiEntry {
+  background-color: #E6F6F9;
+  color: #000;
+  width: 70%;
+  display: inline-block;
+  border: 3px solid darkorange;
+  margin: 2%;
+  /*margin-right: 2%;*/
+  /*border-radius: 5%;*/
+}
+h1 {
+  color: #fff;
+}
+
+#search {
+  border: 2px solid darkorange;
+}
+
+#searchResults {
+  color: #fff;  
+  margin-top: 2%;
+  margin-left -4%;
+
+  
+}
+#searchResults a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+#searchResults a:hover {
+  color: darkorange;
 }
 
 .btn {
@@ -20,15 +59,16 @@ p {
   margin-left: 30%;
   width: 40%;
   padding: 2%;
-border-radius: 5%;
-text-align: center;
+  border-radius: 5%;
+  text-align: center;
+  /*color: #000;*/
   /*opacity: 0.2;*/
 }
+
 /*#content p {
 	text-align: center;
 	margin-top: 3%;
 	font-weight: bold;	
-
 }*/
 
 #content a {
@@ -39,6 +79,13 @@ text-align: center;
 	margin-top: 3%;
 	color: green;
 	text-decoration: underline;
+
+}
+
+input[type=text] {
+  margin-top: 15%;  
+  border-radius: 5%;
+  background-color: var(--bgcolor);
 
 }
 
@@ -56,14 +103,3 @@ text-align: center;
 /*background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.7) 100%), url(http://m.rgbimg.com/cache1nCyif/users/x/xy/xymonau/600/mgZP6rW.jpg) repeat 0 0;*/
     
 }
-
-
-
-/*.overlay {
-	position: absolute;
-
-}*/
-
-/*#content:before {
-	opacity: 0.1;
-}*/
