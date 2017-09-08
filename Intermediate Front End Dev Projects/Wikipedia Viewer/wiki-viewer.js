@@ -4,10 +4,11 @@
   * @version 1.2
 */
 
-<<<<<<< HEAD
 const SENTENCE_LIMIT = 3; // number of words to display
-var QUERY_LIMIT = parseInt($("select option:selected").text()); // number of words to display
+var MAX_QUERY = 100; // maximum # of wiki entries that I want from the API
+var QUERY_LIMIT; // number of words to display
 var search = $("#search");
+var selected = $("select option:selected").text();
 
 /************************************* MAIN CODE *****************************************/
 
@@ -20,12 +21,14 @@ $(document).ready(function() {
 // get JSON data
 function getJSONData(limit) {
   return $.getJSON(`https://en.wikipedia.org/w/api.php?action=opensearch&search= 
-        ${search.val()} &limit= ${limit} &prop=revisions&rvprop=content&format=json&origin=*&gsrsearch=`);
+        ${search.val()} &limit=${MAX_QUERY}&prop=revisions&rvprop=content&format=json&origin=*&gsrsearch=`);
 }
 
 // get JSON data and display Wiki entries
+// return total entry count
 function display() {
-  QUERY_LIMIT = parseInt($("select option:selected").text());
+  selected = $("select option:selected").text();
+  QUERY_LIMIT = parseInt(selected);
 
   getJSONData(QUERY_LIMIT).then(function(wikiEntry) {
     var wikiTitles = wikiEntry[1];
@@ -37,39 +40,40 @@ function display() {
 
     $("#searchResults").html("");
 
-    for (var i = 0; i < length; i++) {
+    /* If total possible wiki topics is less than the current query limit, then set
+    the query limit equal to this total. This ensures that the number of entries retreived
+    doesn't exceed the total and prevents iterating past the maximum bound in the data array.
+    */
+    if (length < QUERY_LIMIT || (selected === "50+" && length > 50)) {
+      QUERY_LIMIT = length;
+    }
+
+    console.log("what:" + selected);
+    /* Display the wiki entries and their total count */
+
+    for (var i = 0; i < QUERY_LIMIT; i++) {
       $("#searchResults").append(`<div class="wikiEntry"> <p> <b> ${wikiTitles[
         i
       ]} </b> </p>
-               <p> ${wikiContent[i]} </p> <p> <a href=" ${wikiLinks[
+                 <p> ${wikiContent[i]} </p> <p> <a href=" ${wikiLinks[
         i
       ]} "> Tell me more</span></a></div>`);
       num = i;
       console.log(num + 1);
     }
+    $("#searchResults").prepend(
+      `<p> Showing ${$(".wikiEntry").length} of ${length} entries. </p>`
+    );
   });
 }
 
 /** Display list of Wiki results based on search bar value when user hits enter */
-=======
-const SENTENCE_LIMIT = 3;       // number of words to display
-var QUERY_LIMIT = 5;     // number of words to display
-var search = $('#search');
-
-/************************************* MAIN CODE *****************************************/
-
-getRandom();
-displayWikiEntries();
-
-
-/** Display list of Wiki results based on user input */
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 function displayWikiEntries() {
   search.keypress(function(e) {
     if (search.val() && e.which === 13) {
       console.log("success");
-<<<<<<< HEAD
       display();
+      // console.log('Length: ' + $('.wikiEntry').length);
     }
   });
 }
@@ -81,35 +85,6 @@ function applyFilter() {
     display();
   });
 }
-=======
-
-      QUERY_LIMIT = parseInt($('select option:selected').text());
-
-      $.getJSON(`https://en.wikipedia.org/w/api.php?action=opensearch&search= 
-        ${search.val()} &limit= ${QUERY_LIMIT} &prop=revisions&rvprop=content&format=json&origin=*&gsrsearch=`).then(
-        function(wikiEntry) {
-          var wikiTitles = wikiEntry[1];
-          var wikiContent = wikiEntry[2];
-          var wikiLinks = wikiEntry[3];
-
-          var length = wikiTitles.length;
-          var num;
-
-          $('#searchResults').html("");
-
-          for (var i=0; i < length; i++) {
-            $('#searchResults').append(`<div class="wikiEntry"> <p> <b> ${wikiTitles[i]} </b> </p>
-               <p> ${wikiContent[i]} </p> <p> <a href=" ${wikiLinks[i]} "> Tell me more</span></a></div>`);
-            num = i;
-            console.log(num+1);
-          }
-          
-        })
-    }
-  })
-}
-
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 
 /** Display title and content of random Wiki entry when user clicks on button */
 function getRandom() {
@@ -175,62 +150,3 @@ function clipContent(content) {
 function arrToStr(arr) {
   return arr.join(" ").replace(",", " ");
 }
-<<<<<<< HEAD
-=======
-
-// console.log(clipContent("hey there mister, are you okay?"));
-// console.log(typeof ["yo"].slice(0, SENTENCE_LIMIT + 1).join(","));
-
-
-/************************************* QUESTIONS *****************************************/
-
-
-/* Parameter name in clipContent() MUST be "content". Otherwise deferred error is fired. Why?
-
-
-  Can't interpolate function parameter, wikiTitle...?
-
-  var url = `https://en.wikipedia.org/wiki/ ${wikiTitle}`;
-
-
-*/
-
-
-/************************************* PREVIOUS CODE *****************************************/
-
-// $('#btn-random').on("click", function() {
-
-// $.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=random&format=json&rnnamespace=0&origin=*&gsrsearch=").then(function(data) {
-//   // console.log(data.query.random[0].title);
-//   $.getJSON("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + data.query.random[0].title + "&origin=*&gsrsearch=").then(function(data) {
-//     $('#random').html(data[0] + " - " + data[2]);
-//   })
-// })});
-
-// .success(
-
-// function(data) {
-// return new Promise(function(resolve, reject) {
-//   resolve(data.query.random[0].title);
-// })})};
-
-// getTitle();
-
-// $.get("https://en.wikipedia.org/wiki/Special:Random").then(function(data) {
-//   $('#random').html(data);
-// })
-
-// why does url display before btn click??
-// $('btn-random').on("click", displayRandom());
-
-// // display random Wiki Entry
-// function displayRandom() {
-//   $('#random').html('https://en.wikipedia.org/wiki/Special:Random');
-// }
-
-// send GET request and retrieve JSON data
-// function init() {
-//   var request = new XMLHttpRequest();
-//   request.open("GET", )
-// }
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9

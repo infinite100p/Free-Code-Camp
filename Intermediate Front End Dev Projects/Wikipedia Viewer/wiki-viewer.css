@@ -8,10 +8,7 @@ html, body {
   background: url(http://wallpaperscraft.ru/image/bliki_svet_zelenyj_abstraktsiya_95934_2560x1600.jpg) no-repeat;
   background-size: cover;
   color: #000;
-<<<<<<< HEAD
   background-color: var(--bgcolor);
-=======
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 
 p {
@@ -28,27 +25,20 @@ p {
   /*margin-right: 2%;*/
   /*border-radius: 5%;*/
 }
-<<<<<<< HEAD
 h1 {
   color: #fff;
 }
-=======
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 
 #search {
   border: 2px solid darkorange;
 }
 
 #searchResults {
-<<<<<<< HEAD
   color: #fff;  
   margin-top: 2%;
   margin-left -4%;
-
+  font-size: 1.2em;
   
-=======
-  color: #fff;
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 #searchResults a {
   font-weight: bold;
@@ -58,13 +48,17 @@ h1 {
   color: darkorange;
 }
 
+select {
+  margin-left: 1%;
+}
+
 .btn {
   margin-top: 2%;
 }
 
 #content {
-	position: relative;
-	/*height: 50%;*/
+  position: relative;
+  /*height: 50%;*/
   margin-top: 10%;
   margin-left: 30%;
   width: 40%;
@@ -76,35 +70,32 @@ h1 {
 }
 
 /*#content p {
-	text-align: center;
-	margin-top: 3%;
-	font-weight: bold;	
+  text-align: center;
+  margin-top: 3%;
+  font-weight: bold;  
 }*/
 
 #content a {
-	font-weight: bold;
-	/*font-size: 1.2em;*/
-	text-align: center;
-	display: block;
-	margin-top: 3%;
-	color: green;
-	text-decoration: underline;
+  font-weight: bold;
+  /*font-size: 1.2em;*/
+  text-align: center;
+  display: block;
+  margin-top: 3%;
+  color: green;
+  text-decoration: underline;
 
 }
 
 input[type=text] {
   margin-top: 15%;  
   border-radius: 5%;
-<<<<<<< HEAD
   background-color: var(--bgcolor);
 
-=======
->>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 
 .highlight {
-  background: #F5FBF2;	
-  /*background-color: pink;	*/
+  background: #F5FBF2;  
+  /*background-color: pink; */
   /*background: url(https://image.freepik.com/free-vector/pink-shiny-background_1378-143.jpg);*/
   border: 2px solid lightgray;
   position: absolute;
