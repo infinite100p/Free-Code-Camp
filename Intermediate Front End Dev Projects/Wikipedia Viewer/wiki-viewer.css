@@ -8,7 +8,10 @@ html, body {
   background: url(http://wallpaperscraft.ru/image/bliki_svet_zelenyj_abstraktsiya_95934_2560x1600.jpg) no-repeat;
   background-size: cover;
   color: #000;
+<<<<<<< HEAD
   background-color: var(--bgcolor);
+=======
+>>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 
 p {
@@ -25,20 +28,27 @@ p {
   /*margin-right: 2%;*/
   /*border-radius: 5%;*/
 }
+<<<<<<< HEAD
 h1 {
   color: #fff;
 }
+=======
+>>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 
 #search {
   border: 2px solid darkorange;
 }
 
 #searchResults {
+<<<<<<< HEAD
   color: #fff;  
   margin-top: 2%;
   margin-left -4%;
 
   
+=======
+  color: #fff;
+>>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 #searchResults a {
   font-weight: bold;
@@ -85,8 +95,11 @@ h1 {
 input[type=text] {
   margin-top: 15%;  
   border-radius: 5%;
+<<<<<<< HEAD
   background-color: var(--bgcolor);
 
+=======
+>>>>>>> fc33036944f52903913b88c7ce5f56270bab63f9
 }
 
 .highlight {
