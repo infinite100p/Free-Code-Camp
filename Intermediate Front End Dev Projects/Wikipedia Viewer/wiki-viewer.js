@@ -16,6 +16,7 @@ $(document).ready(function() {
   displayWikiEntries(); // display wiki entries on 'Enter'
   applyFilter(); // update results displayed
   getRandom(); // get random wiki title and content
+  enterSearch();
 });
 
 // get JSON data
@@ -24,55 +25,68 @@ function getJSONData(limit) {
         ${search.val()} &limit=${MAX_QUERY}&prop=revisions&rvprop=content&format=json&origin=*&gsrsearch=`);
 }
 
-// get JSON data and display Wiki entries
-// return total entry count
+/* Display the wiki entries and their total count */
+function displayWikiEntries() {
+  display().then(function(titles, content, links, totalNumOfWikis) {
+      for (var i = 0; i < QUERY_LIMIT; i++) {
+      $("#searchResults").append(`<div class="wikiEntry"> <p> <b> ${titles[
+        i
+      ]} </b> </p>
+                 <p> ${content[i]} </p> <p> <a href=" ${links[
+        i
+      ]} "> Tell me more</span></a></div>`);
+      // num = i;
+      // console.log(num + 1);
+    }
+        $("#searchResults").prepend(
+      `<p> Showing ${$(".wikiEntry").length} of ${totalNumOfWikis} entries. </p>`
+    );
+})
+}
+
+/* 
+ * @return {Deferred Object} stores array of wiki titles, content, links, and total num of wiki titles
+ * 
+ * Get JSON data, Clear the screen for next batch of wiki results
+ *
+ * If total wiki titles is less than query limit or greater than max query limit allowed,
+ * then set query limit to that total
+*/
+
 function display() {
   selected = $("select option:selected").text();
   QUERY_LIMIT = parseInt(selected);
+  var defer = $.Deferred();
 
   getJSONData(QUERY_LIMIT).then(function(wikiEntry) {
     var wikiTitles = wikiEntry[1];
     var wikiContent = wikiEntry[2];
     var wikiLinks = wikiEntry[3];
 
-    var length = wikiTitles.length;
-    var num;
+    var totalNumOfWikis = wikiTitles.length;
+    // var num;
 
     $("#searchResults").html("");
+
+    defer.resolve(wikiTitles, wikiContent, wikiLinks, totalNumOfWikis);
 
     /* If total possible wiki topics is less than the current query limit, then set
     the query limit equal to this total. This ensures that the number of entries retreived
     doesn't exceed the total and prevents iterating past the maximum bound in the data array.
     */
-    if (length < QUERY_LIMIT || (selected === "50+" && length > 50)) {
-      QUERY_LIMIT = length;
+    if (totalNumOfWikis < QUERY_LIMIT || (selected === "50+" && totalNumOfWikis > 50)) {
+      QUERY_LIMIT = totalNumOfWikis;
     }
-
-    console.log("what:" + selected);
-    /* Display the wiki entries and their total count */
-
-    for (var i = 0; i < QUERY_LIMIT; i++) {
-      $("#searchResults").append(`<div class="wikiEntry"> <p> <b> ${wikiTitles[
-        i
-      ]} </b> </p>
-                 <p> ${wikiContent[i]} </p> <p> <a href=" ${wikiLinks[
-        i
-      ]} "> Tell me more</span></a></div>`);
-      num = i;
-      console.log(num + 1);
-    }
-    $("#searchResults").prepend(
-      `<p> Showing ${$(".wikiEntry").length} of ${length} entries. </p>`
-    );
   });
+  return defer;
 }
 
+
 /** Display list of Wiki results based on search bar value when user hits enter */
-function displayWikiEntries() {
+function enterSearch() {
   search.keypress(function(e) {
     if (search.val() && e.which === 13) {
-      console.log("success");
-      display();
+      displayWikiEntries();
       // console.log('Length: ' + $('.wikiEntry').length);
     }
   });
@@ -82,7 +96,7 @@ function displayWikiEntries() {
 // entries displayed = query limit selected
 function applyFilter() {
   $("select").change(function() {
-    display();
+    displayWikiEntries();
   });
 }
 
@@ -100,6 +114,8 @@ function getRandom() {
         var title = wikiEntry[0];
         var content = wikiEntry[2];
         // $("#content").addClass('highlight');
+
+        $('.wikiEntry').attr('display', 'none');
         $("#content").html(
           `<h4> ${title} </h4> ${clipContent(
             content
